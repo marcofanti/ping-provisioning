@@ -1,0 +1,31 @@
+- name: Packages are present
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: Docker repository is added and cache is updated
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ debian_version }} {{ release }}"
+    update_cache: yes
+    state: present
+
+- name: Docker Engine is present
+  apt:
+    name: docker-engine
+    update_cache: yes
+    force: yes
+
+- name: User is added to the docker group
+  user:
+    name: ubuntu
+    group: docker
+  register: user_result
+
+- name: Debian Docker service is restarted
+  service:
+    name: docker
+    state: restarted
+  when: user_result|changed

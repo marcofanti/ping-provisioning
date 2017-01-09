@@ -1,0 +1,9 @@
+- hosts: localhost
+  vars:
+    - project: elk
+  roles:
+    - docker
+    - docker-compose
+    - logstash
+    - containers
+    - users

@@ -1,0 +1,16 @@
+/.idea
+/*.iml
+/go-demo
+.DS_Store
+*.go
+/.idea
+/*.iml
+.vagrant
+/packer/*.env
+/packer/packer_cache
+secrets*
+*.tfstate.backup
+*.pem
+*.retry
+/docker
+/docker*.tgz
